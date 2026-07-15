@@ -1,19 +1,31 @@
 import { Injectable } from '@nestjs/common';
 import { Artista } from './models/artista.model';
 import { Cancion } from './models/cancion.model';
+import { Playlist } from './models/playlist.model';
 
 @Injectable()
 export class AppService {
 
   private artistas:Artista[] = [];
   private canciones:Cancion[] = [];
+  private playlists:Playlist[] = [];
 
 
   constructor() {
     this.inicializarArtistas();
     this.inicializarCanciones();
+    this.inicializarPlaylists();
   }
 
+
+  inicializarPlaylists(){
+    const playlist1 = new Playlist();
+    playlist1.id = 1;
+    playlist1.nombre = "Mi Playlist Favorita";
+    playlist1.fechaCreacion = new Date("2023-06-01");
+    playlist1.canciones = [this.canciones[0], this.canciones[1]];
+    this.playlists.push(playlist1);
+  }
 
   inicializarCanciones(){
     const cancion1 = new Cancion();
@@ -114,4 +126,14 @@ export class AppService {
     return this.canciones;
   }
 
+  getPlaylists(): Playlist[] {
+    return this.playlists;
+  }
+
+  crearPlaylist( playlist:Playlist ):Playlist{
+    playlist.id = this.playlists.length + 1 ;
+    playlist.fechaCreacion = new Date();
+    this.playlists.push(playlist);
+    return playlist;
+  }
 }
