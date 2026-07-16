@@ -4,6 +4,8 @@ Este es un repositorio de ejemplo para la practica de nestj y controladores http
 
 ## Description
 
+Se agrega sebastián al repositorio
+
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Project setup
