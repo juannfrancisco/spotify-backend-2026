@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from 'src/app.service';
 import { Artista } from 'src/models/artista.model';
 
@@ -10,6 +10,12 @@ export class ArtistasController {
     @Get()
     getArtistas():Artista[]{
         return this.appService.getArtistas();
+    }
+
+
+    @Get(':id')
+    getArtista(@Param('id') id:string):Artista{
+        return this.appService.getArtistaPorId(+id);
     }
 
 }

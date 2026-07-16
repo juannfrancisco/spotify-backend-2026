@@ -154,6 +154,14 @@ export class AppService {
     throw new NotFoundException();
   }
 
+  getArtistaPorId(id:number):Artista {
+    for(let i=0; i< this.artistas.length ; i++){
+      if( id === this.artistas[i].id )
+        return this.artistas[i];
+    }
+    throw new NotFoundException();
+  }
+
   agregarCancion( idPlaylist:number, idCancion:number ):void{
     let playlist:Playlist = this.getPlaylistPorId(idPlaylist);
     let cancion: Cancion = this.getCancionPorId(idCancion);
