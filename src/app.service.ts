@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, InternalServerErrorException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Artista } from './models/artista.model';
 import { Cancion } from './models/cancion.model';
 import { Playlist } from './models/playlist.model';
@@ -136,4 +136,29 @@ export class AppService {
     this.playlists.push(playlist);
     return playlist;
   }
+
+
+  getPlaylistPorId( id:number ):Playlist {
+    for(let i=0; i< this.playlists.length ; i++){
+      if( id === this.playlists[i].id )
+        return this.playlists[i];
+    }
+    throw new NotFoundException();
+  }
+
+  getCancionPorId( id:number ):Cancion {
+    for(let i=0; i< this.canciones.length ; i++){
+      if( id === this.canciones[i].id )
+        return this.canciones[i];
+    }
+    throw new NotFoundException();
+  }
+
+  agregarCancion( idPlaylist:number, idCancion:number ):void{
+    let playlist:Playlist = this.getPlaylistPorId(idPlaylist);
+    let cancion: Cancion = this.getCancionPorId(idCancion);
+
+    playlist.canciones.push(cancion);
+  }
+
 }
